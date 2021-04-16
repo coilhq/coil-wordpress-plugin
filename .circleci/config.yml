@@ -18,7 +18,13 @@ jobs:
      - image: cimg/php:8.0.3
    steps:
      - checkout # check out the code in the project directory
+     - restore_cache:
+        key: -v1-deps{{checksum "composer.lock"}}
      - run: composer install
+     - save_cahce:
+        key: -v1-deps{{checksum "composer.lock"}}
+        paths:
+          - vendor
      - run: composer phpcs
 workflows:
  version: 2
