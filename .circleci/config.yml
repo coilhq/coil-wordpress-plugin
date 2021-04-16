@@ -5,7 +5,13 @@ jobs:
      - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
    steps:
      - checkout # check out the code in the project directory
+     - restore_cache:
+        key: -
      - run: npm install
+     - save_cache: -v1-deps{{checksum "package-lock.json"}}
+        key: -v1-deps{{checksum "package-lock.json"}}
+          paths:
+            - "node_modules"
      - run: npx grunt test
  php_linting:
    docker:
