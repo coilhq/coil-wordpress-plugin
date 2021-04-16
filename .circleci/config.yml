@@ -6,9 +6,9 @@ jobs:
    steps:
      - checkout # check out the code in the project directory
      - restore_cache:
-        key: -
+        key: -v1-deps{{checksum "package-lock.json"}}
      - run: npm install
-     - save_cache: -v1-deps{{checksum "package-lock.json"}}
+     - save_cache:
         key: -v1-deps{{checksum "package-lock.json"}}
           paths:
             - "node_modules"
