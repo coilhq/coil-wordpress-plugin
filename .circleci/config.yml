@@ -21,7 +21,7 @@ jobs:
      - restore_cache:
         key: -v1-deps{{checksum "composer.lock"}}
      - run: composer install
-     - save_cahce:
+     - save_cache:
         key: -v1-deps{{checksum "composer.lock"}}
         paths:
           - vendor
