@@ -7,6 +7,7 @@ jobs:
      - checkout # check out the code in the project directory
      - restore_cache:
         key: v1-dependency-cache-{{checksum "package.json"}}
+     - run: whoami
      - run: npm install
      - save_cache:
         key: v1-dependency-cache-{{checksum "package.json"}}
