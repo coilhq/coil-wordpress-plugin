@@ -6,12 +6,12 @@ jobs:
    steps:
      - checkout # check out the code in the project directory
      - restore_cache:
-        key: v1-dependency-cache-{{checksum "package.json"}}
-     - run: pwd
-     - run: npm install
+        key: v1-dependency-cache-{{checksum "package-lock.json"}}
+     - run: npm install --no-save
      - save_cache:
-        key: v1-dependency-cache-{{checksum "package.json"}}
+        key: v1-dependency-cache-{{checksum "package-lock.json"}}
         paths:
+          - /root/.npm
           - node_modules
      - run: npx grunt test
  php_linting:
