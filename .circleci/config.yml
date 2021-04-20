@@ -2,7 +2,7 @@ version: 2.0
 jobs:
  js_scss_linting:
    docker:
-     - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+     - image: cimg/node:15.14.0 # the primary container, where your job's commands are run
    steps:
      - checkout # check out the code in the project directory
      - restore_cache:
