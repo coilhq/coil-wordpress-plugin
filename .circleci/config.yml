@@ -11,7 +11,6 @@ jobs:
      - save_cache:
         key: v1-dependency-cache-{{checksum "package-lock.json"}}
         paths:
-          - /root/.npm
           - node_modules
      - run: npx grunt test
  php_linting:
