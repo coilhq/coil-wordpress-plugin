@@ -2,17 +2,16 @@ version: 2.0
 jobs:
  js_scss_linting:
    docker:
-     - image: cimg/node:15.14.0 # the primary container, where your job's commands are run
+     - image: cimg/node:14.10.1 # the primary container, where the job's commands are run
    steps:
      - checkout # check out the code in the project directory
      - restore_cache:
         key: v1-dependency-cache-{{checksum "package-lock.json"}}
-     - run: npm install
-     - run: cat package-lock.json
+     - run: npm ci
      - save_cache:
         key: v1-dependency-cache-{{checksum "package-lock.json"}}
         paths:
-          - node_modules
+          - /root/.npm
      - run: npx grunt test
  php_linting:
    docker:
