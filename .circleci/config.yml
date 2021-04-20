@@ -6,10 +6,10 @@ jobs:
    steps:
      - checkout # check out the code in the project directory
      - restore_cache:
-        key: v1-dependency-cache-{{checksum "package-lock.json"}}
+        key: v2-dependency-cache-{{checksum "package-lock.json"}}
      - run: npm ci
      - save_cache:
-        key: v1-dependency-cache-{{checksum "package-lock.json"}}
+        key: v2-dependency-cache-{{checksum "package-lock.json"}}
         paths:
           - /root/.npm
      - run: npx grunt test
