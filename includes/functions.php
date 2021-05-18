@@ -281,9 +281,7 @@ function add_body_class( $classes ) : array {
 		$coil_status = Gating\get_content_gating( get_queried_object_id() );
 		$classes[]   = sanitize_html_class( 'coil-' . $coil_status );
 
-		if ( ! empty( $payment_pointer_id ) ) {
-			$classes[] = ( Gating\get_excerpt_gating( get_queried_object_id() ) ) ? 'coil-show-excerpt' : 'coil-hide-excerpt';
-		} else {
+		if ( empty( $payment_pointer_id ) ) {
 			// Error: payment pointer ID is missing.
 			$classes[] = 'coil-missing-id';
 

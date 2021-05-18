@@ -215,21 +215,15 @@
 	}
 
 	/**
-	 * @return {bool} Determine if the excerpt is set to show for this post.
-	 */
-	function isExcerptEnabled() {
-		return ( document.body.classList.contains( 'coil-show-excerpt' ) ) ? true : false;
-	}
-
-	/**
 	 * Displays a message based on the body classes and verification outcome.
 	 */
 	function showVerificationFailureMessage() {
+		// E.g. when content is loading then length > 0
 		if ( $( 'p.monetize-msg' ).length > 0 ) {
 			$( 'p.monetize-msg' ).remove();
 
 			if ( isSubscribersOnly() ) {
-				if ( isExcerptEnabled() && getContentExcerpt() ) {
+				if ( getContentExcerpt() ) {
 					document.body.classList.add( 'show-excerpt-message' );
 					$( contentContainer ).before( showSubscriberOnlyMessage( unableToVerify ) );
 					$( contentContainer ).prepend( getContentExcerpt() );
@@ -325,13 +319,13 @@
 			return;
 		}
 
-		// Update body class to show free content.
+		// Update body class to show only free content.
 		$( 'body' ).removeClass( 'monetization-not-initialized' ).addClass( 'coil-extension-not-found' );
 
 		if ( isSubscribersOnly() ) {
 			$( contentContainer ).before( showSubscriberOnlyMessage( fullyGated ) );
 
-			if ( isExcerptEnabled() && getContentExcerpt() ) {
+			if ( getContentExcerpt() ) {
 				document.body.classList.add( 'show-excerpt-message' );
 				$( contentContainer ).prepend( getContentExcerpt() );
 			} else {
@@ -388,20 +382,10 @@
 			}
 
 			$( 'body' ).trigger( 'coil-missing-id' );
-		} else if ( ! isMonetizedAndPublic() ) {
 			// Verify monetization only if we are gating or partially gating content.
-			// If post is gated then show verification message after excerpt.
-			if ( isSubscribersOnly() ) {
-				if ( isExcerptEnabled() ) {
-					// Subscriber gating and no post excerpt...Verifying extension.
-					document.querySelector( contentContainer ).before( showMonetizationMessage( loadingContent, '' ) );
-				} else {
-					// Subscriber gating and has post excerpt...Verifying extension.
-					$( 'p.coil-post-excerpt' ).after( showMonetizationMessage( loadingContent, '' ) );
-				}
-			} else {
-				document.querySelector( contentContainer ).before( showMonetizationMessage( loadingContent, '' ) );
-			}
+		} else if ( ! isMonetizedAndPublic() ) {
+			// If post is gated then show verification message
+			document.querySelector( contentContainer ).before( showMonetizationMessage( loadingContent, '' ) );
 
 			// Update message if browser extension is verifying user.
 			setTimeout( function() {
@@ -471,16 +455,14 @@
 		if ( ! isMonetizedAndPublic() && ! usingDefaultContentContainer() ) {
 			showContentContainer();
 			document.body.classList.remove( 'show-fw-message' );
-			if ( isExcerptEnabled() ) {
-				hideContentExcerpt();
-			}
+			hideContentExcerpt();
 		}
 
 		$( 'body' ).removeClass( 'monetization-not-initialized' ).addClass( 'monetization-initialized' ); // Update body class to show content.
 		messageWrapper.remove(); // Remove status message.
 
-		if ( ! isExcerptEnabled() ) {
-			$( 'div.coil-post-excerpt' ).remove(); // Remove post excerpt.
+		if ( showDonationBar ) {
+			removeDonationBar();
 		}
 
 		if ( showDonationBar ) {

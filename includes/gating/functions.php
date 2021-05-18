@@ -148,8 +148,8 @@ function maybe_restrict_content( string $content ) : string {
 	switch ( $coil_status ) {
 		case 'gate-all':
 		case 'gate-tagged-blocks':
-			// Restrict all / some excerpt content based on gating settings.
-			if ( get_excerpt_gating( get_queried_object_id() ) ) {
+			// Restrict excerpt content to custom excerpts for gated posts / pages.
+			if ( ! empty( $content_excerpt ) ) {
 				$public_content .= sprintf(
 					'<p>%s</p>',
 					$content_excerpt
@@ -190,26 +190,6 @@ function get_post_gating( $post_id ) : string {
 
 	return $gating;
 }
-
-/**
- * Get the value of the "Display Excerpt" setting for this post .
- *
- * @param integer $post_id The post to check.
- * @return bool true show excerpt, false hide excerpt.
- */
-function get_excerpt_gating( $post_id ) : bool {
-
-	$post_id   = (int) $post_id;
-	$post_type = get_post_type( $post_id );
-
-	$display_excerpt  = false;
-	$excerpt_settings = get_global_excerpt_settings();
-	if ( ! empty( $excerpt_settings ) && isset( $excerpt_settings[ $post_type ] ) ) {
-		$display_excerpt = $excerpt_settings[ $post_type ];
-	}
-	return $display_excerpt;
-}
-
 
 /**
  * Get the gating type for the specified term.
@@ -348,22 +328,6 @@ function get_global_posts_gating() : array {
 	$global_settings = get_option( 'coil_monetization_settings_group' );
 	if ( ! empty( $global_settings ) ) {
 		return $global_settings;
-	}
-
-	return [];
-}
-
-/**
- * Get whatever settings are stored in the plugin as the default
- * excerpt settings for the various content types.
- *
- * @return void
- */
-function get_global_excerpt_settings() {
-
-	$global_excerpt_settings = get_option( 'coil_content_settings_excerpt_group' );
-	if ( ! empty( $global_excerpt_settings ) ) {
-		return $global_excerpt_settings;
 	}
 
 	return [];
