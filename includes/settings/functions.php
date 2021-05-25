@@ -252,7 +252,7 @@ function coil_monetization_settings_validation( $monetization_settings ) : array
 			// If it is not a value returned for the padlock and donation bar settings then it must relate to a post type.
 			$valid_choices = array_keys( Gating\get_monetization_setting_types() );
 
-			// The default value is no-gating (Enable Earning with Public Access)
+			// The default value is no-gating (Earn with Public Access)
 			$value = in_array( $option_value, $valid_choices, true ) ? sanitize_key( $option_value ) : 'no-gating';
 		}
 	}
@@ -601,19 +601,19 @@ function coil_messaging_settings_render_callback( $args ) {
 
 	switch ( $args['id'] ) {
 		case 'coil_fully_gated_content_message':
-			$helper_text = __( 'Appears for non-Coil members when an entire post / page has earning enabled with Coil Only Access.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members when an entire post / page is set to Earn with Coil Only Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_partially_gated_content_message':
-			$helper_text = __( 'Appears for non-Coil members over blocks set to Only Show Coil Members on a post / page where earning is enabled with Split Access.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members over blocks set to Only Show Coil Members on an Earn with Split Access post / page.', 'coil-web-monetization' );
 			break;
 		case 'coil_verifying_status_message':
 			$helper_text = __( 'Appears while the plugin checks that an active Web Monetization account is in place.', 'coil-web-monetization' );
 			break;
 		case 'coil_unable_to_verify_message':
-			$helper_text = __( 'Appears when content is set to Enable Earning with Coil Only Access and browser setup is correct, but Web Monetization doesn\'t start. This can happen when the user doesn\'t have an active Coil account.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears when content is set to Earn with Coil Only Access and browser setup is correct, but Web Monetization doesn\'t start. This can happen when the user doesn\'t have an active Coil account.', 'coil-web-monetization' );
 			break;
 		case 'coil_voluntary_donation_message':
-			$helper_text = __( 'Appears for non-Coil members in a footer bar when content is set to Enable Earning with Public Access.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members in a footer bar when content is set to Earn with Public Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_learn_more_button_text':
 			$helper_text = __( 'Text on the "Learn more" button which is shown below the message replacing posts / pages set to Coil Only Access as well as in the support creator footer.', 'coil-web-monetization' );
@@ -657,7 +657,7 @@ function coil_title_padlock_settings_render_callback() {
 	printf(
 		'<label for="%s">%s</label>',
 		esc_attr( 'display_padlock_id' ),
-		esc_html_e( 'Show padlock next to post title if the post is set to Enable Earning with Coil Only Access.', 'coil-web-monetization' )
+		esc_html_e( 'Show padlock next to post title if the post is set to Earn with Coil Only Access.', 'coil-web-monetization' )
 	);
 }
 
@@ -681,7 +681,7 @@ function coil_show_donation_bar_settings_render_callback() {
 	printf(
 		'<label for="%s">%s</label>',
 		esc_attr( 'display_donation_bar' ),
-		esc_html_e( 'Show the support creator message in a footer bar on posts that are set to Enable Earning with Public Access.', 'coil-web-monetization' )
+		esc_html_e( 'Show the support creator message in a footer bar on posts that are set to Earn with Public Access.', 'coil-web-monetization' )
 	);
 }
 

@@ -172,14 +172,14 @@
 	}
 
 	/**
-	 * @return {bool} Helper function to determine if the content is set to "Enable Earning with Public Access"
+	 * @return {bool} Helper function to determine if the content is set to "Earn with Public Access"
 	 */
 	function isMonetizedAndPublic() {
 		return document.body.classList.contains( 'coil-no-gating' );
 	}
 
 	/**
-	 * @return {bool} Helper function to determine if the content is set to "Enable Earning with Coil Only Access"
+	 * @return {bool} Helper function to determine if the content is set to "Earn with Coil Only Access"
 	 */
 	function isSubscribersOnly() {
 		return document.body.classList.contains( 'coil-gate-all' );
@@ -201,7 +201,7 @@
 	}
 
 	/**
-	 * @return {bool} Helper function to determine if the content is set to "Enable Earning with Split Access"
+	 * @return {bool} Helper function to determine if the content is set to "Earn with Split Access"
 	 */
 	function isSplitContent() {
 		return document.body.classList.contains( 'coil-gate-tagged-blocks' );
@@ -352,7 +352,7 @@
 				addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
 			}
 		} else if ( isMonetizedAndPublic() ) {
-			// Content is set to Enable Earning with Public Access but no extension found.
+			// Content is set to Earn with Public Access but no extension found.
 
 			if ( showDonationBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
 				$( 'body' ).append( showBannerMessage( voluntaryDonation ) );
@@ -449,7 +449,7 @@
 					// Monetization not started and verification failed.
 					showVerificationFailureMessage();
 				} else if ( isMonetizedAndPublic() ) {
-					// Content is is set to Enable Earning with Public Access but extension is stopped.
+					// Content is is set to Earn with Public Access but extension is stopped.
 					if ( showDonationBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
 						$( 'body' ).append( showBannerMessage( voluntaryDonation ) );
 						addBannerDismissClickHandler( 'ShowCoilPublicMsg' );

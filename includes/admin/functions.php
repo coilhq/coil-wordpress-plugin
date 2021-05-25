@@ -73,7 +73,7 @@ function render_coil_metabox() : void {
 
 	if ( $use_gutenberg ) {
 		// This is used if WP < 5.3 (in some cases, without the Gutenberg plugin).
-		$settings['gate-tagged-blocks'] = esc_html__( 'Enable Earning with Split Access', 'coil-web-monetization' );
+		$settings['gate-tagged-blocks'] = esc_html__( 'Earn with Split Access', 'coil-web-monetization' );
 	}
 
 	do_action( 'coil_before_render_metabox', $settings );
@@ -83,7 +83,7 @@ function render_coil_metabox() : void {
 		<legend>
 			<?php
 			if ( $use_gutenberg ) {
-				esc_html_e( 'Set the type of monetization for the article. Note: If "Enable Earning with Split Access" is selected, you will need to save the article and reload the editor to view the options at block level.', 'coil-web-monetization' );
+				esc_html_e( 'Set the type of monetization for the article. Note: If "Earn with Split Access" is selected, you will need to save the article and reload the editor to view the options at block level.', 'coil-web-monetization' );
 			} else {
 				esc_html_e( 'Set the type of monetization for the article.', 'coil-web-monetization' );
 			}
