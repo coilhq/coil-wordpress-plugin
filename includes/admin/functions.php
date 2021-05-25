@@ -83,9 +83,9 @@ function render_coil_metabox() : void {
 		<legend>
 			<?php
 			if ( $use_gutenberg ) {
-				esc_html_e( 'Set the type of monetization for the article. Note: If "Earn with Split Access" is selected, you will need to save the article and reload the editor to view the options at block level.', 'coil-web-monetization' );
+				esc_html_e( 'Select earning and visibility preferences for your content. Note: If "Earn with Split Access" is selected, you will need to save the article and reload the editor to view the options at block level.', 'coil-web-monetization' );
 			} else {
-				esc_html_e( 'Set the type of monetization for the article.', 'coil-web-monetization' );
+				esc_html_e( 'Select earning and visibility preferences for your content.', 'coil-web-monetization' );
 			}
 			?>
 		</legend>

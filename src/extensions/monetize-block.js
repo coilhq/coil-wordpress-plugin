@@ -205,7 +205,7 @@ const monetizeBlockControls = createHigherOrderComponent( ( BlockEdit ) => {
 										},
 									]
 								}
-								help={ __( 'Set the visibility based on the monetization you prefer.' ) }
+								help={ __( 'Select visibility preferences for the selected block.' ) }
 								onChange={ ( value ) => setAttributes( { monetizeBlockDisplay: value } ) }
 							/>
 
@@ -361,7 +361,7 @@ const PostMonetizationFields = withDispatch( ( dispatch, props ) => {
 				},
 			]
 		}
-		help={ __( 'Set the type of monetization for the article.' ) }
+		help={ __( 'Select earning and visibility preferences for your content.' ) }
 		onChange={ ( value ) => props.updateMetaValue( value ) }
 	/>
 ) ) );
