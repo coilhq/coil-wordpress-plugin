@@ -989,7 +989,7 @@ function transfer_customizer_message_settings() {
 		$messaging_settings['coil_partially_gated_content_message'] = get_theme_mod( $coil_partial_gating_message );
 		remove_theme_mod( $coil_partial_gating_message );
 	}
-	if ( get_theme_mod( $coil_unsupported_message , 'null' ) !== 'null' ) {
+	if ( get_theme_mod( $coil_unsupported_message, 'null' ) !== 'null' ) {
 		$messaging_settings['coil_fully_gated_content_message'] = get_theme_mod( $coil_unsupported_message );
 		remove_theme_mod( $coil_unsupported_message );
 	}
@@ -1047,7 +1047,7 @@ function transfer_customizer_monetization_settings() {
 	remove_theme_mod( $coil_show_donation_bar );
 
 	// Before moving post gating settings across check that post types and gating types are valid.
-	$supported_post_types = Coil\get_supported_post_types( 'names' );
+	$supported_post_types     = Coil\get_supported_post_types( 'names' );
 	$supported_gating_options = array_keys( Gating\get_monetization_setting_types() );
 
 	if ( ! empty( $supported_post_types ) && ! empty( $previous_gating_options ) ) {
