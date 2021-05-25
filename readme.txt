@@ -106,3 +106,21 @@ First release.
 * Tweak - All buttons that point to external links now open in a new tab.
 
 * Security - Added extra checks on the Theme Options partial loader logic.
+
+= v1.9.0 =
+
+= 20 May 2021 =
+
+* Fix - Fixed embedded videos that were set to Paying Viewers Only so that they now display correctly once monetization has begun.
+* Fix - The support creator footer bar message no longer displays for paying viewers. 
+
+* Enhancement - The Coil settings panel's first tab is now the Global Settings tab where the payment pointers and CSS selectors are saved.
+* Enhancement - A sidebar has been added throughout the settings panel with help, FAQ and documentation links.
+* Enhancement - All customization features have been consolidated into the Coil settings panel (including message, button text and link, and padlock and support creator footer bar display customization).
+* Enhancement - The wording explaining message customizations has been simplified for easier reading.
+* Enhancement - The wording describing monetization settings has been adjusted to Paying Viewers instead of referring to Coil Members and Monetized Users.
+* Enhancement - The new default monetization setting for pages and posts is now Monetized and Public instead of No Monetization.
+
+* Tweak - Code has been linted.
+* Tweak - Eslint is the new linting tool being used instead of JSHint.
+* Tweak - The Grunt watch task now also includes minifying the relevant CSS files as well to reflect SCSS changes made in real time during development.
