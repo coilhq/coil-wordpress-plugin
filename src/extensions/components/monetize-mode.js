@@ -18,7 +18,7 @@ export class MonetizedMode extends Component {
 	sync() {
 		const { isActive } = this.props;
 
-		// Adds 'is-monetized' class to the html body if the content's gating is not undefined and is not set to No Monetization.
+		// Adds 'is-monetized' class to the html body if the content's gating is not undefined and is not set to Disable Earning.
 		if ( typeof isActive !== 'undefined' && isActive !== 'no' ) {
 			document.body.classList.add( 'is-monetized' );
 		} else {

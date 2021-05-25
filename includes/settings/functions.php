@@ -147,7 +147,7 @@ function register_admin_content_settings() {
 
 	add_settings_section(
 		'coil_fully_gated_content_message',
-		__( 'Message for blocked Coil Members Only content', 'coil-web-monetization' ),
+		__( 'Message replacing posts / pages set to Coil Only Access', 'coil-web-monetization' ),
 		__NAMESPACE__ . '\coil_messaging_settings_render_callback',
 		'coil_messaging_settings'
 	);
@@ -155,7 +155,7 @@ function register_admin_content_settings() {
 	// === Partially gated content message
 	add_settings_section(
 		'coil_partially_gated_content_message',
-		__( 'Message for blocked Split Content sections', 'coil-web-monetization' ),
+		__( 'Message replacing blocks set to Only Show Coil Members', 'coil-web-monetization' ),
 		__NAMESPACE__ . '\coil_messaging_settings_render_callback',
 		'coil_messaging_settings'
 	);
@@ -252,7 +252,7 @@ function coil_monetization_settings_validation( $monetization_settings ) : array
 			// If it is not a value returned for the padlock and donation bar settings then it must relate to a post type.
 			$valid_choices = array_keys( Gating\get_monetization_setting_types() );
 
-			// The default value is no-gating (Monetized and Public)
+			// The default value is no-gating (Enable Earning with Public Access)
 			$value = in_array( $option_value, $valid_choices, true ) ? sanitize_key( $option_value ) : 'no-gating';
 		}
 	}
@@ -466,7 +466,7 @@ function coil_content_settings_posts_render_callback() {
 		$content_settings_posts_options = Gating\get_global_posts_gating();
 
 		?>
-		<p><?php esc_html_e( 'Use the settings below to control the defaults for how your content is monetized and gated across your whole site. You can override the defaults by configuring monetization against your categories and taxonomies. You can also override the defaults against individual pages and posts or even specific blocks inside of them.', 'coil-web-monetization' ); ?>
+		<p><?php esc_html_e( 'Use the settings below to control the defaults across your whole site to determine whether earning is enabled and who can access content. You can override the defaults by configuring them against your categories and taxonomies. You can also override the defaults against individual pages and posts or even specific blocks inside of them.', 'coil-web-monetization' ); ?>
 		</p>
 		<table class="widefat">
 			<thead>
@@ -490,7 +490,7 @@ function coil_content_settings_posts_render_callback() {
 							 * Specify the default checked state on the input from
 							 * any settings stored in the database. If the individual
 							 * input status is not set, default to the first radio
-							 * option (No Monetization)
+							 * option (Disable Earning)
 							 */
 							$checked_input = false;
 							if ( $setting_key === 'no' ) {
@@ -601,25 +601,25 @@ function coil_messaging_settings_render_callback( $args ) {
 
 	switch ( $args['id'] ) {
 		case 'coil_fully_gated_content_message':
-			$helper_text = __( 'Appears for non-monetized users over hidden Coil Members Only content.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members when an entire post / page has earning enabled with Coil Only Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_partially_gated_content_message':
-			$helper_text = __( 'Appears for non-monetized users over hidden blocks set to Show for monetized users on a Split Content post / page.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members over blocks set to Only Show Coil Members on a post / page where earning is enabled with Split Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_verifying_status_message':
 			$helper_text = __( 'Appears while the plugin checks that an active Web Monetization account is in place.', 'coil-web-monetization' );
 			break;
 		case 'coil_unable_to_verify_message':
-			$helper_text = __( 'Appears when content is set to Coil Members Only and browser setup is correct, but Web Monetization doesn\'t start. This can happen when the user doesn\'t have an active Coil account.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears when content is set to Enable Earning with Coil Only Access and browser setup is correct, but Web Monetization doesn\'t start. This can happen when the user doesn\'t have an active Coil account.', 'coil-web-monetization' );
 			break;
 		case 'coil_voluntary_donation_message':
-			$helper_text = __( 'Appears for non-monetized users in a footer bar when content is set to Monetized and Public or Split Content.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members in a footer bar when content is set to Enable Earning with Public Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_learn_more_button_text':
-			$helper_text = __( 'Text on the "Learn more" shown below the Coil Members Only message and in the support creator footer.', 'coil-web-monetization' );
+			$helper_text = __( 'Text on the "Learn more" button which is shown below the message replacing posts / pages set to Coil Only Access as well as in the support creator footer.', 'coil-web-monetization' );
 			break;
 		case 'coil_learn_more_button_link':
-			$helper_text = __( '"Learn more" button link/URL to direct non-monetized users to Coil\'s website. Shown below the Coil Members Only message and in the support creator footer.', 'coil-web-monetization' );
+			$helper_text = __( '"Learn more" button link/URL to direct non-Coil members to Coil\'s website. Shown below the message replacing posts / pages set to Coil Only Access as well as in the support creator footer.', 'coil-web-monetization' );
 			break;
 		default:
 			$helper_text = '';
@@ -657,7 +657,7 @@ function coil_title_padlock_settings_render_callback() {
 	printf(
 		'<label for="%s">%s</label>',
 		esc_attr( 'display_padlock_id' ),
-		esc_html_e( 'Show padlock next to post title if the post is for Coil Members Only.', 'coil-web-monetization' )
+		esc_html_e( 'Show padlock next to post title if the post is set to Enable Earning with Coil Only Access.', 'coil-web-monetization' )
 	);
 }
 
@@ -681,7 +681,7 @@ function coil_show_donation_bar_settings_render_callback() {
 	printf(
 		'<label for="%s">%s</label>',
 		esc_attr( 'display_donation_bar' ),
-		esc_html_e( 'Show the support creator message in a footer bar on posts that are Monetized and Public.', 'coil-web-monetization' )
+		esc_html_e( 'Show the support creator message in a footer bar on posts that are set to Enable Earning with Public Access.', 'coil-web-monetization' )
 	);
 }
 

@@ -196,11 +196,11 @@ const monetizeBlockControls = createHigherOrderComponent( ( BlockEdit ) => {
 											value: 'always-show',
 										},
 										{
-											label: __( 'Show for monetized users' ),
+											label: __( 'Only Show Coil Members' ),
 											value: 'show-monetize-users',
 										},
 										{
-											label: __( 'Hide for monetized users' ),
+											label: __( 'Hide for Coil Members' ),
 											value: 'hide-monetize-users',
 										},
 									]
@@ -340,23 +340,23 @@ const PostMonetizationFields = withDispatch( ( dispatch, props ) => {
 		options={
 			[
 				{
-					label: __( 'Use Default', 'coil-web-monetization' ),
+					label: __( 'Default', 'coil-web-monetization' ),
 					value: 'default',
 				},
 				{
-					label: __( 'No Monetization', 'coil-web-monetization' ),
+					label: __( 'Disable Earning', 'coil-web-monetization' ),
 					value: 'no',
 				},
 				{
-					label: __( 'Monetized and Public', 'coil-web-monetization' ),
+					label: __( 'Enable Earning with Public Access', 'coil-web-monetization' ),
 					value: 'no-gating',
 				},
 				{
-					label: __( 'Coil Members Only', 'coil-web-monetization' ),
+					label: __( 'Enable Earning with Coil Only Access', 'coil-web-monetization' ),
 					value: 'gate-all',
 				},
 				{
-					label: __( 'Split Content', 'coil-web-monetization' ),
+					label: __( 'Enable Earning with Split Access', 'coil-web-monetization' ),
 					value: 'gate-tagged-blocks',
 				},
 			]

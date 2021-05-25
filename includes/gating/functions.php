@@ -60,12 +60,12 @@ function get_monetization_setting_types( $show_default = false ) : array {
 	$settings = [];
 
 	if ( true === $show_default ) {
-		$settings['default'] = esc_html__( 'Use Default', 'coil-web-monetization' );
+		$settings['default'] = esc_html__( 'Default', 'coil-web-monetization' );
 	}
 
-	$settings['no']        = esc_html__( 'No Monetization', 'coil-web-monetization' );
-	$settings['no-gating'] = esc_html__( 'Monetized and Public', 'coil-web-monetization' );
-	$settings['gate-all']  = esc_html__( 'Coil Members Only', 'coil-web-monetization' );
+	$settings['no']        = esc_html__( 'Disable Earning', 'coil-web-monetization' );
+	$settings['no-gating'] = esc_html__( 'Enable Earning with Public Access', 'coil-web-monetization' );
+	$settings['gate-all']  = esc_html__( 'Enable Earning with Coil Only Access', 'coil-web-monetization' );
 
 	return $settings;
 }
@@ -79,10 +79,10 @@ function get_monetization_setting_types( $show_default = false ) : array {
 function get_valid_gating_types() {
 
 	$valid = [
-		'gate-all', // Coil Members Only.
-		'gate-tagged-blocks', // split content.
-		'no', // no monetization.
-		'no-gating', // monetixed and public.
+		'gate-all', // Enable Earning with Coil Only Access.
+		'gate-tagged-blocks', // Enable Earning with Split Access.
+		'no', // Disable Earning.
+		'no-gating', // Eanable Earning with Public Access.
 		'default', // whatever is set on the post to revert back.
 	];
 	return $valid;
@@ -276,12 +276,12 @@ function get_taxonomy_term_gating( $post_id ) {
 
 	} elseif ( in_array( 'no-gating', $term_gating_options, true ) ) {
 
-		// Priority 2 - Monetized and Public.
+		// Priority 2 - Enable Earning with Public Access.
 		return 'no-gating';
 
 	} elseif ( in_array( 'no', $term_gating_options, true ) ) {
 
-		// Priority 3 - No Monetization.
+		// Priority 3 - Disable Earning.
 		return 'no';
 
 	} else {

@@ -82,7 +82,7 @@
 
 		const modalData = {
 			headerLogo: siteLogo,
-			title: 'This content is for Coil Members Only',
+			title: 'This content is for Coil Members only',
 			content: message,
 			button: {
 				text: learnMoreButtonText,
@@ -116,8 +116,8 @@
 
 	/**
 	 * @param {String} message from coilParams.
-	 * @return {object} Overlay "Split Content" blocks with a message when set to
-	 * Only Show for monetized users. This will display if the browser is
+	 * @return {object} Overlay "Split Access" blocks with a message when set to
+	 * Only Show Coil Members. This will display if the browser is
 	 * not compatible or verified.
 	 */
 	function showSplitContentMessage( message ) {
@@ -172,14 +172,14 @@
 	}
 
 	/**
-	 * @return {bool} Helper function to determine if the content is "Monetized and Public"
+	 * @return {bool} Helper function to determine if the content is set to "Enable Earning with Public Access"
 	 */
 	function isMonetizedAndPublic() {
 		return document.body.classList.contains( 'coil-no-gating' );
 	}
 
 	/**
-	 * @return {bool} Helper function to determine if the content is "Coil Members Only"
+	 * @return {bool} Helper function to determine if the content is set to "Enable Earning with Coil Only Access"
 	 */
 	function isSubscribersOnly() {
 		return document.body.classList.contains( 'coil-gate-all' );
@@ -201,7 +201,7 @@
 	}
 
 	/**
-	 * @return {bool} Helper function to determine if the content is "Split Content"
+	 * @return {bool} Helper function to determine if the content is set to "Enable Earning with Split Access"
 	 */
 	function isSplitContent() {
 		return document.body.classList.contains( 'coil-gate-tagged-blocks' );
@@ -238,7 +238,7 @@
 					$( contentContainer ).before( showSubscriberOnlyMessage( unableToVerify ) );
 				}
 			} else if ( isSplitContent() ) {
-				// Split content and unable to verify hidden content.
+				// Split Access and unable to verify hidden content.
 				$( '.coil-show-monetize-users' ).prepend( showSplitContentMessage( unableToVerify ) );
 
 				// Show non-Coil-members content.
@@ -338,7 +338,7 @@
 				document.body.classList.add( 'show-fw-message' );
 			}
 		} else if ( isSplitContent() ) {
-			// Split content with no extension found.
+			// Split Access with no extension found.
 			$( '.coil-show-monetize-users' ).prepend( showSplitContentMessage( partialGating ) );
 
 			// Show non-coil-members content.
@@ -352,7 +352,7 @@
 				addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
 			}
 		} else if ( isMonetizedAndPublic() ) {
-			// Content is monetized and public but no extension found.
+			// Content is set to Enable Earning with Public Access but no extension found.
 
 			if ( showDonationBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
 				$( 'body' ).append( showBannerMessage( voluntaryDonation ) );
@@ -449,7 +449,7 @@
 					// Monetization not started and verification failed.
 					showVerificationFailureMessage();
 				} else if ( isMonetizedAndPublic() ) {
-					// Content is monetized and public but extension is stopped.
+					// Content is is set to Enable Earning with Public Access but extension is stopped.
 					if ( showDonationBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
 						$( 'body' ).append( showBannerMessage( voluntaryDonation ) );
 						addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
