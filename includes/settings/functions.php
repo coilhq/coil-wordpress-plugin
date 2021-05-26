@@ -601,10 +601,10 @@ function coil_messaging_settings_render_callback( $args ) {
 
 	switch ( $args['id'] ) {
 		case 'coil_fully_gated_content_message':
-			$helper_text = __( 'Appears for non-Coil members when an entire post / page is set to Earn with Coil Only Access.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for viewers who are not Coil members when an entire post / page is set to Earn with Coil Only Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_partially_gated_content_message':
-			$helper_text = __( 'Appears for non-Coil members over blocks set to Only Show Coil Members on a post / page where earning is enabled with Split Access.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for viewers who are not Coil members over blocks set to Only Show Coil Members on a post / page where earning is enabled with Split Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_verifying_status_message':
 			$helper_text = __( 'Appears while the plugin checks that an active Web Monetization account is in place.', 'coil-web-monetization' );
@@ -613,13 +613,13 @@ function coil_messaging_settings_render_callback( $args ) {
 			$helper_text = __( 'Appears when content is set to Earn with Coil Only Access and browser setup is correct, but Web Monetization doesn\'t start. This can happen when the user doesn\'t have an active Coil account.', 'coil-web-monetization' );
 			break;
 		case 'coil_voluntary_donation_message':
-			$helper_text = __( 'Appears for non-Coil members in a footer bar when content is set to Earn with Public Access or with Split Access.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for viewers who are not Coil members in a footer bar when content is set to Earn with Public Access or with Split Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_learn_more_button_text':
 			$helper_text = __( 'Text on the "Learn more" button which is shown below the message replacing posts / pages set to Coil Only Access as well as in the support creator footer.', 'coil-web-monetization' );
 			break;
 		case 'coil_learn_more_button_link':
-			$helper_text = __( '"Learn more" button link/URL to direct non-Coil members to Coil\'s website. Shown below the message replacing posts / pages set to Coil Only Access as well as in the support creator footer.', 'coil-web-monetization' );
+			$helper_text = __( '"Learn more" button link/URL to direct viewers who are not Coil members to Coil\'s website. Shown below the message replacing posts / pages set to Coil Only Access as well as in the support creator footer.', 'coil-web-monetization' );
 			break;
 		default:
 			$helper_text = '';
