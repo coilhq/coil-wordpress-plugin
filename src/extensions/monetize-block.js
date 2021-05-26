@@ -344,10 +344,6 @@ const PostMonetizationFields = withDispatch( ( dispatch, props ) => {
 					value: 'default',
 				},
 				{
-					label: __( 'Disable Earning', 'coil-web-monetization' ),
-					value: 'no',
-				},
-				{
 					label: __( 'Earn with Public Access', 'coil-web-monetization' ),
 					value: 'no-gating',
 				},
@@ -358,6 +354,10 @@ const PostMonetizationFields = withDispatch( ( dispatch, props ) => {
 				{
 					label: __( 'Earn with Split Access', 'coil-web-monetization' ),
 					value: 'gate-tagged-blocks',
+				},
+				{
+					label: __( 'Disable Earning', 'coil-web-monetization' ),
+					value: 'no',
 				},
 			]
 		}
