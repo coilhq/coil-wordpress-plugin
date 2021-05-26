@@ -613,7 +613,7 @@ function coil_messaging_settings_render_callback( $args ) {
 			$helper_text = __( 'Appears when content is set to Earn with Coil Only Access and browser setup is correct, but Web Monetization doesn\'t start. This can happen when the user doesn\'t have an active Coil account.', 'coil-web-monetization' );
 			break;
 		case 'coil_voluntary_donation_message':
-			$helper_text = __( 'Appears for non-Coil members in a footer bar when content is set to Earn with Public Access.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members in a footer bar when content is set to Earn with Public Access or with Split Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_learn_more_button_text':
 			$helper_text = __( 'Text on the "Learn more" button which is shown below the message replacing posts / pages set to Coil Only Access as well as in the support creator footer.', 'coil-web-monetization' );
@@ -681,7 +681,7 @@ function coil_show_donation_bar_settings_render_callback() {
 	printf(
 		'<label for="%s">%s</label>',
 		esc_attr( 'display_donation_bar' ),
-		esc_html_e( 'Show the support creator message in a footer bar on posts that are set to Earn with Public Access.', 'coil-web-monetization' )
+		esc_html_e( 'Show the support creator message in a footer bar on posts that are set to Earn with Public Access or with Split Access.', 'coil-web-monetization' )
 	);
 }
 
