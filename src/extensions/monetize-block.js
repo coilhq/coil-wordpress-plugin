@@ -205,7 +205,7 @@ const monetizeBlockControls = createHigherOrderComponent( ( BlockEdit ) => {
 										},
 									]
 								}
-								help={ __( 'Select visibility preferences for the selected block.' ) }
+								help={ __( 'Set the block\'s visibility.' ) }
 								onChange={ ( value ) => setAttributes( { monetizeBlockDisplay: value } ) }
 							/>
 

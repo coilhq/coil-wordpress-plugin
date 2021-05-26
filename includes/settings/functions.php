@@ -604,7 +604,7 @@ function coil_messaging_settings_render_callback( $args ) {
 			$helper_text = __( 'Appears for non-Coil members when an entire post / page is set to Earn with Coil Only Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_partially_gated_content_message':
-			$helper_text = __( 'Appears for non-Coil members over blocks set to Only Show Coil Members on an Earn with Split Access post / page.', 'coil-web-monetization' );
+			$helper_text = __( 'Appears for non-Coil members over blocks set to Only Show Coil Members on a post / page where earning is enabled with Split Access.', 'coil-web-monetization' );
 			break;
 		case 'coil_verifying_status_message':
 			$helper_text = __( 'Appears while the plugin checks that an active Web Monetization account is in place.', 'coil-web-monetization' );
