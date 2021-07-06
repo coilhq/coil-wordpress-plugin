@@ -28,7 +28,6 @@ class Test_Messaging_Settings extends WP_UnitTestCase {
 		'button_link'                     => 'coil_learn_more_button_link',
 		'fully_gated_excerpt_message'     => 'coil_fully_gated_excerpt_message',
 		'partially_gated_excerpt_message' => 'coil_partially_gated_excerpt_message',
-
 	];
 
 	/**

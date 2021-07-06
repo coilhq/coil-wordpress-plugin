@@ -181,10 +181,9 @@ function register_admin_content_settings() {
 		'coil_appearance_settings_group',
 		__NAMESPACE__ . '\coil_appearance_settings_validation'
 	);
-
 	add_settings_section(
 		'coil_display_settings_section',
-		false,
+		__( 'Display Settings', 'coil-web-monetization' ),
 		false,
 		'coil_display_settings'
 	);
@@ -206,6 +205,39 @@ function register_admin_content_settings() {
 		'coil_display_settings',
 		'coil_display_settings_section'
 	);
+
+	// ==== CTA theme
+	add_settings_section(
+		'coil_exclusive_post__settings_section',
+		__( 'Exclusive Post Message Customization', 'coil-web-monetization' ),
+		false,
+		'coil_style_settings'
+	);
+
+	add_settings_field(
+		'coil_message_color_theme',
+		__( 'Color Theme', 'coil-web-monetization' ),
+		__NAMESPACE__ . '\coil_message_color_theme_render_callback',
+		'coil_style_settings',
+		'coil_exclusive_post__settings_section'
+	);
+
+	add_settings_field(
+		'coil_message_font',
+		__( 'Use Theme Font', 'coil-web-monetization' ),
+		__NAMESPACE__ . '\coil_message_font_render_callback',
+		'coil_style_settings',
+		'coil_exclusive_post__settings_section'
+	);
+
+	add_settings_field(
+		'coil_message_branding',
+		__( 'Message Branding', 'coil-web-monetization' ),
+		__NAMESPACE__ . '\coil_message_branding_render_callback',
+		'coil_style_settings',
+		'coil_exclusive_post__settings_section'
+	);
+
 }
 
 /* ------------------------------------------------------------------------ *
@@ -302,20 +334,48 @@ function coil_messaging_settings_validation( $messaging_settings ) : array {
 }
 
 /**
- * Allow the checkboxes that select the padlock and donation bar
- * display settings to be properly validated
+ * Allow the radio buttons that select theme preferences
+ * and the padlock and donation bar display checkboxes
+ * to be properly validated
  *
  * @param array $appearance_settings The padlock and donation bar display checkboxes
+ * and the radio button settings for the restricted content message customization theme selection
  *
  * @return array
  */
 function coil_appearance_settings_validation( $appearance_settings ) {
 
-	$display_setting_id_array = [ 'coil_title_padlock', 'coil_show_donation_bar' ];
+	$checkbox_options       = [ 'coil_title_padlock', 'coil_show_donation_bar', 'coil_message_font' ];
+	$valid_color_choices    = [ 'light', 'dark' ];
+	$valid_branding_choices = [ 'site_logo', 'coil_logo', 'no_logo' ];
+	$coil_theme_color_key   = 'coil_message_color_theme';
+	$message_branding_key   = 'coil_message_branding';
+	$array_keys             = array_keys( $appearance_settings );
 
-	foreach ( $display_setting_id_array as $key ) {
-		// Default is checked
-		$appearance_settings[ $key ] = $appearance_settings[ $key ] === 'on' ? true : false;
+	if ( in_array( $coil_theme_color_key, $array_keys, true ) ) {
+		if ( in_array( $appearance_settings[ $coil_theme_color_key ], $valid_color_choices, true ) ) {
+			$appearance_settings[ $coil_theme_color_key ] = sanitize_key( $appearance_settings[ $coil_theme_color_key ] );
+		}
+	} else {
+		// The default value is the light theme
+		$appearance_settings[ $coil_theme_color_key ] = 'light';
+	}
+
+	if ( in_array( $message_branding_key, $array_keys, true ) ) {
+		if ( in_array( $appearance_settings[ $message_branding_key ], $valid_branding_choices, true ) ) {
+			$appearance_settings[ $message_branding_key ] = sanitize_key( $appearance_settings[ $message_branding_key ] );
+		}
+	} else {
+		// The default value is the site logo
+		$appearance_settings[ $coil_theme_color_key ] = 'site_logo';
+	}
+
+	foreach ( $checkbox_options as $key ) {
+		if ( in_array( $key, $array_keys, true ) ) {
+			$appearance_settings[ $key ] = $appearance_settings[ $key ] === 'on' ? true : false;
+		} else {
+			$appearance_settings[ $key ] = false;
+		}
 	}
 
 	return $appearance_settings;
@@ -582,7 +642,7 @@ function coil_messaging_textbox_render_callback( $content_id ) {
 		esc_attr( 'coil_messaging_settings_group[' . $content_id . ']' ),
 		esc_attr( $content_id ),
 		esc_attr( Admin\get_messaging_setting( $content_id, true ) ),
-		esc_attr( 'min-width: 440px' ),
+		esc_attr( 'width: 440px' ),
 		esc_attr( Admin\get_messaging_setting( $content_id ) )
 	);
 }
@@ -624,7 +684,7 @@ function coil_messaging_settings_render_callback( $args ) {
 
 	if ( '' !== $helper_text ) {
 		?>
-		<p><?php echo esc_html( $helper_text ); ?></p>
+		<p style="width: 440px;"><?php echo esc_html( $helper_text ); ?></p>
 		<?php
 	}
 
@@ -688,6 +748,138 @@ function coil_show_donation_bar_settings_render_callback() {
 		esc_attr( 'display_donation_bar' ),
 		esc_html_e( 'Show the support creator message in a footer bar on posts that are Monetized and Public.', 'coil-web-monetization' )
 	);
+}
+
+/**
+ * Renders the output of the color theme option checkbox
+ * @return void
+ */
+
+function coil_message_color_theme_render_callback() {
+	/**
+	 * Select the appropriate radio button
+	 * based on settings stored in the database.
+	 * If the input status is not set, default to the light theme
+	 */
+
+	$checked_input = Admin\get_appearance_settings( 'coil_message_color_theme' );
+
+	if ( ! empty( $checked_input ) && $checked_input === 'light' ) {
+		$checked_input = 'checked="true"';
+	} else {
+		$checked_input = false;
+	}
+
+	printf(
+		'<input type="radio" name="%s" id="%s" value="%s" %s />',
+		esc_attr( 'coil_appearance_settings_group[coil_message_color_theme]' ),
+		esc_attr( 'light_color_theme' ),
+		esc_attr( 'light' ),
+		$checked_input
+	);
+
+	printf(
+		'<label for="%s">%s</label>',
+		esc_attr( 'message_color_theme' ),
+		esc_html_e( 'Light theme', 'coil-web-monetization' )
+	);
+
+	printf( '<br>' );
+
+	$checked_input = Admin\get_appearance_settings( 'coil_message_color_theme' );
+
+	if ( ! empty( $checked_input ) && $checked_input === 'dark' ) {
+		$checked_input = 'checked="true"';
+	} else {
+		$checked_input = false;
+	}
+
+	printf(
+		'<input type="radio" name="%s" id="%s" value="%s" %s />',
+		esc_attr( 'coil_appearance_settings_group[coil_message_color_theme]' ),
+		esc_attr( 'dark_color_theme' ),
+		esc_attr( 'dark' ),
+		$checked_input
+	);
+
+	printf(
+		'<label for="%s">%s</label>',
+		esc_attr( 'message_color_theme' ),
+		esc_html_e( 'Dark theme', 'coil-web-monetization' )
+	);
+}
+
+/**
+ * Renders the output of the font option checkbox
+ * @return void
+ */
+
+function coil_message_font_render_callback() {
+
+	/**
+	 * Specify the default checked state on the input from
+	 * any settings stored in the database. If the
+	 * input status is not set, default to unchecked
+	 */
+	$checked_input_value = Admin\get_appearance_settings( 'coil_message_font' );
+
+	printf(
+		'<input type="%s" name="%s" id="%s" "%s">',
+		esc_attr( 'checkbox' ),
+		esc_attr( 'coil_appearance_settings_group[coil_message_font]' ),
+		esc_attr( 'message_font' ),
+		checked( 1, $checked_input_value, false )
+	);
+
+	printf(
+		'<label for="%s">%s</label>',
+		esc_attr( 'message_font' ),
+		esc_html_e( 'Either use the default font provided, or customize it to fit with your selected theme instead.', 'coil-web-monetization' )
+	);
+}
+
+/**
+ * Renders the output of the show Coil branding checkbox
+ * @return void
+ */
+
+function coil_message_branding_render_callback() {
+
+	/**
+	 * Specify the default checked state on the input from
+	 * any settings stored in the database. If the
+	 * input status is not set, default to unchecked
+	 */
+	$checked_input_value = Admin\get_appearance_settings( 'coil_message_branding' );
+
+	?>
+		<select name="coil_appearance_settings_group[coil_message_branding]" id="coil_message_branding">
+			<?php
+				printf(
+					'<option value="%s">%s</option>',
+					esc_attr( 'site_logo' ),
+					esc_attr( 'Site logo' )
+				);
+
+				printf(
+					'<option value="%s">%s</option>',
+					esc_attr( 'coil_logo' ),
+					esc_attr( 'Coil logo' )
+				);
+
+				printf(
+					'<option value="%s">%s</option>',
+					esc_attr( 'no_logo' ),
+					esc_attr( 'No branding' )
+				);
+			?>
+		</select>
+
+		<script type="text/javascript">
+			document.getElementById('coil_message_branding').value = "<?php echo $checked_input_value; ?>";
+		</script>
+	<?php
+
 }
 
 /**
@@ -840,6 +1032,7 @@ function render_coil_settings_screen() : void {
 				case 'appearance_settings':
 					settings_fields( 'coil_appearance_settings_group' );
 					do_settings_sections( 'coil_display_settings' );
+					do_settings_sections( 'coil_style_settings' );
 					submit_button();
 			}
 			?>

@@ -465,7 +465,7 @@ function get_messaging_setting( $field_id, $default = false ) {
 }
 
 /**
- * Retrieve the padlock and donation bar display settings
+ * Retrieve the padlock and donation bar general display settings
  * using a key from coil_appearance_settings_group (serialized).
  *
  * @param string $field_id The named key in the wp_options serialized array.
@@ -473,16 +473,32 @@ function get_messaging_setting( $field_id, $default = false ) {
  */
 function get_appearance_settings( $field_id ) {
 
-	$options                  = get_option( 'coil_appearance_settings_group', [] );
-	$display_setting_id_array = [ 'coil_title_padlock', 'coil_show_donation_bar' ];
+	$options                          = get_option( 'coil_appearance_settings_group', [] );
+	$general_display_checkbox_options = [ 'coil_title_padlock', 'coil_show_donation_bar' ];
+	$cta_style_checkbox_options       = [ 'coil_message_font', 'coil_message_branding' ];
 
-	if ( in_array( $field_id, $display_setting_id_array, true ) ) {
+	if ( $field_id === 'coil_message_color_theme' ) {
+		// Default is the light theme
+		if ( isset( $options[ $field_id ] ) ) {
+			$setting_value = $options[ $field_id ];
+		} else {
+			$setting_value = 'light';
+		}
+	} elseif ( in_array( $field_id, $general_display_checkbox_options, true ) ) {
 		// Default is checked
 		if ( ! isset( $options[ $field_id ] ) ) {
 			$setting_value = true;
 		} else {
 			$setting_value = $options[ $field_id ];
 		}
+	} elseif ( in_array( $field_id, $cta_style_checkbox_options, true ) ) {
+		// Default is unchecked
+		if ( ! isset( $options[ $field_id ] ) ) {
+			$setting_value = false;
+		} else {
+			$setting_value = $options[ $field_id ];
+		}
 	}
 	return $setting_value;
 }
+

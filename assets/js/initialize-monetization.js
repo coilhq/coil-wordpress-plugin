@@ -16,8 +16,13 @@
 		adminMissingIdNotice = coilParams.admin_missing_id_notice,
 		learnMoreButtonText = coilParams.learn_more_button_text,
 		learnMoreButtonLink = coilParams.learn_more_button_link,
+		coilMessageBranding = coilParams.coil_message_branding,
 		siteLogo = coilParams.site_logo,
-		showDonationBar = Boolean( coilParams.show_donation_bar ); // Cast to boolean - wp_localize_script forces string values.
+		coilLogo = coilParams.coil_logo,
+		coilLogoWhite = coilParams.coil_logo_white,
+		showDonationBar = Boolean( coilParams.show_donation_bar ), // Cast to boolean - wp_localize_script forces string values.
+		exclusiveMessageTheme = coilParams.exclusive_message_theme,
+		fontSelection = Boolean( coilParams.font_selection );
 
 	const subscriberOnlyMessage = wp.template( 'subscriber-only-message' );
 	const splitContentMessage = wp.template( 'split-content-message' );
@@ -79,9 +84,27 @@
 	function showSubscriberOnlyMessage( message ) {
 		const modalContainer = document.createElement( 'div' );
 		modalContainer.classList.add( 'entry-content', 'coil-message-container' );
+		if ( exclusiveMessageTheme === 'dark' ) {
+			modalContainer.classList.add( 'coil-dark-theme' );
+		}
+		if ( fontSelection ) {
+			modalContainer.classList.add( 'coil-inherit-theme-font' );
+		}
+
+		let brandingLogo;
+
+		if ( coilMessageBranding === 'site_logo' ) {
+			brandingLogo = siteLogo;
+		} else if ( coilMessageBranding === 'coil_logo' && exclusiveMessageTheme === 'dark' ) {
+			brandingLogo = coilLogoWhite;
+		} else if ( coilMessageBranding === 'coil_logo' ) {
+			brandingLogo = coilLogo;
+		} else {
+			brandingLogo = '';
+		}
 
 		const modalData = {
-			headerLogo: siteLogo,
+			headerLogo: brandingLogo,
 			title: 'This content is for Paying Viewers Only',
 			content: message,
 			button: {

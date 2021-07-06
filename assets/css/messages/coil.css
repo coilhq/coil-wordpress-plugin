@@ -346,6 +346,40 @@ body.monetization-not-initialized.coil-missing-id.show-fw-message .coil-message-
           font-size: 14px;
           line-height: 22px; } }
 
+body.coil-gate-all.coil-extension-not-found.show-fw-message .coil-message-container.coil-dark-theme .coil-message-inner,
+body.coil-missing-id.coil-extension-not-found.show-fw-message .coil-message-container.coil-dark-theme .coil-message-inner,
+body.monetization-not-initialized.coil-gate-all.show-fw-message .coil-message-container.coil-dark-theme .coil-message-inner,
+body.coil-gate-all.coil-extension-not-found.show-excerpt-message .coil-message-container.coil-dark-theme .coil-message-inner,
+body.monetization-not-initialized.coil-gate-all.show-excerpt-message .coil-message-container.coil-dark-theme .coil-message-inner,
+body.monetization-not-initialized.coil-missing-id.show-fw-message .coil-message-container.coil-dark-theme .coil-message-inner {
+  background: #292929;
+  color: #fff;
+  opacity: 0.9; }
+
+body.coil-gate-all.coil-extension-not-found.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button,
+body.coil-missing-id.coil-extension-not-found.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button,
+body.monetization-not-initialized.coil-gate-all.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button,
+body.coil-gate-all.coil-extension-not-found.show-excerpt-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button,
+body.monetization-not-initialized.coil-gate-all.show-excerpt-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button,
+body.monetization-not-initialized.coil-missing-id.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button {
+  background-color: #fff;
+  color: #2c333a; }
+  body.coil-gate-all.coil-extension-not-found.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button:hover,
+  body.coil-missing-id.coil-extension-not-found.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button:hover,
+  body.monetization-not-initialized.coil-gate-all.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button:hover,
+  body.coil-gate-all.coil-extension-not-found.show-excerpt-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button:hover,
+  body.monetization-not-initialized.coil-gate-all.show-excerpt-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button:hover,
+  body.monetization-not-initialized.coil-missing-id.show-fw-message .coil-message-container.coil-dark-theme .coil-message-header a.coil-message-button:hover {
+    background-color: #ccc; }
+
+body.coil-gate-all.coil-extension-not-found.show-fw-message .coil-message-container.coil-inherit-theme-font,
+body.coil-missing-id.coil-extension-not-found.show-fw-message .coil-message-container.coil-inherit-theme-font,
+body.monetization-not-initialized.coil-gate-all.show-fw-message .coil-message-container.coil-inherit-theme-font,
+body.coil-gate-all.coil-extension-not-found.show-excerpt-message .coil-message-container.coil-inherit-theme-font,
+body.monetization-not-initialized.coil-gate-all.show-excerpt-message .coil-message-container.coil-inherit-theme-font,
+body.monetization-not-initialized.coil-missing-id.show-fw-message .coil-message-container.coil-inherit-theme-font {
+  font-family: inherit; }
+
 body.monetization-not-initialized.coil-gate-all.show-excerpt-message .coil-message-container,
 body.coil-gate-all.coil-extension-not-found.show-excerpt-message .coil-message-container {
   display: block !important; }

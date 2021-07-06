@@ -109,6 +109,34 @@ body.monetization-not-initialized.coil-missing-id.show-fw-message {
 			}
 		}
 	}
+	
+	// Changes to implement dark theme
+	.coil-message-container.coil-dark-theme {
+
+		.coil-message-inner {
+			background: $black;
+			color: $message_background_colour;
+			opacity: 0.9;
+		}
+
+		.coil-message-header {
+			a.coil-message-button {
+				background-color: $message_background_colour;
+				color: $message_font_colour;
+
+				&:hover {
+					background-color: $message_content_conceal_colour_dark_theme;
+				}
+			}
+		}
+	}
+
+	// Changes to implement theme font selection
+	.coil-message-container.coil-inherit-theme-font {
+
+		font-family: inherit;
+	}
+
 }
 
 // Scenario 2
